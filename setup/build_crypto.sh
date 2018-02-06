@@ -20,8 +20,14 @@ sh "$SCRIPT_DIR/build_crypto_iphoneos_armv7.sh"
 sh "$SCRIPT_DIR/build_crypto_iphonesimulator_x86_64.sh"
 sh "$SCRIPT_DIR/build_crypto_iphonesimulator_i386.sh"
 
-xcrun lipo -create .build/iphonesimulator/i386/lib/libcrypto.a .build/iphonesimulator/x86_64/lib/libcrypto.a .build/iphoneos/armv7/lib/libcrypto.a .build/iphoneos/armv7s/lib/libcrypto.a .build/iphoneos/arm64/lib/libcrypto.a -o "$SCRIPT_DIR/../Libraries/crypto/libcrypto.a"
+xcrun lipo -create .build/iphonesimulator/i386/lib/libcrypto.a \
+                   .build/iphonesimulator/x86_64/lib/libcrypto.a \
+                   .build/iphoneos/armv7/lib/libcrypto.a \
+                   .build/iphoneos/armv7s/lib/libcrypto.a \
+                   .build/iphoneos/arm64/lib/libcrypto.a \
+                   -o "$SCRIPT_DIR/../Libraries/crypto/libcrypto.a"
 cp -rf $TDIR/openssl-$OPENSSL_VERSION/include $SCRIPT_DIR/../Libraries/crypto/
+cp -rf $TDIR/openssl-$OPENSSL_VERSION/lib $SCRIPT_DIR/../Libraries/crypto/
 
 cd -
 rm -rf $TDIR
